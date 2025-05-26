@@ -27,6 +27,6 @@ If the OP replies with a valid ₹ amount (e.g. `₹200`, `100`), the bot parses
 
 - **Frontend (HTML + JS):**
   - Displays live scam total
-  - Hosted free on GitHub Pages / Netlify / Vercel
+  - Hosted free on GitHub Pages 
 
 ---
