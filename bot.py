@@ -6,10 +6,10 @@ from datetime import datetime
 
 # Reddit API setup
 reddit = praw.Reddit(
-    client_id="XkL_fzzg-bj2t6ZG7cVD5Q",
-    client_secret="MIL9dgTykaw2E822Gx00xjvmiK5XSQ",
-    username="SneakerGodAlpha",
-    password="TheAahanGogoi@220708",
+    client_id="redacted",
+    client_secret="redacted",
+    username="redacted",
+    password="redacted",
     user_agent="ZeptoScamCounter by u/dawn-the-great"
 )
 
