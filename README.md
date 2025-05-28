@@ -1,5 +1,7 @@
 # 🧾 Zepto Scam Counter
 
+https://zepto-scam-counter.vercel.app/
+
 A passive data-collection system powered by Reddit user interaction. This project tracks how much money users report being scammed by Zepto, using a fully automated Reddit bot + minimal backend infrastructure.
 
 # 💸 How It Works
