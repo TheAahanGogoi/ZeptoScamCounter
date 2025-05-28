@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" href="ZeptoScamCounter.png" type="image/png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Zepto Scam Tracker</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #6e1fb4;
+      --text: #ffffff;
+      --highlight: #ffde59;
+      --font: 'Inter', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 1.5rem;
+    }
+
+    .container {
+      max-width: 600px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      flex: 1;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+    }
+
+    .total {
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: var(--highlight);
+      margin-bottom: 1rem;
+    }
+
+    .note {
+      font-size: 0.95rem;
+      color: #e0e0e0;
+      margin-bottom: 1rem;
+    }
+
+    .note a {
+      color: #fff;
+      text-decoration: underline;
+      font-weight: 500;
+    }
+
+    .extra-info {
+      font-size: 0.85rem;
+      color: #ccc;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.4rem;
+      }
+
+      .total {
+        font-size: 2.8rem;
+      }
+
+      .note, .extra-info {
+        font-size: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Zepto has (approximately) scammed people out of</h1>
+    <div class="total" id="scamTotal">₹0</div>
+
+    <div class="note">
+      Based on user reports from 
+      <a href="https://www.reddit.com/r/FuckZepto" target="_blank">r/FuckZepto</a>
+    </div>
+
+    <div class="extra-info">
+      ⚠️ This isn't official data. It's based on stories from real people.<br/>
+      This is money lost to inconsistent pricing, hidden fees, and manipulative app design.<br/>
+      Updated every few minutes as new reports come in.
+    </div>
+  </div>
+
+  <script>
+    const display = document.getElementById("scamTotal");
+
+    const formatCurrency = (amount) => {
+      return `₹${Math.floor(amount).toLocaleString('en-IN')}`;
+    };
+
+    const animateToAmount = (targetAmount) => {
+      let current = 0;
+      const duration = 1500;
+      const steps = 60;
+      const stepTime = duration / steps;
+      const increment = targetAmount / steps;
+
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= targetAmount) {
+          current = targetAmount;
+          clearInterval(timer);
+        }
+        display.textContent = formatCurrency(current);
+      }, stepTime);
+    };
+
+    // 🔁 Replace with your real API URL below
+    fetch("http://127.0.0.1:8000/api/scam-total")
+      .then(response => response.json())
+      .then(data => {
+        if (data.total) {
+          animateToAmount(data.total);
+        } else {
+          display.textContent = "₹0";
+        }
+      })
+      .catch(err => {
+        console.error("Failed to fetch scam total:", err);
+        display.textContent = "Error loading total";
+      });
+  </script>
+
+</body>
+</html>
